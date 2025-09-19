@@ -1,16 +1,39 @@
-function TodoItem({ todo, deleteTodo, toggleTodo, editTodo }) {
+function TodoItem({ todo, deleteTodo, toggleTodo, editTodo, selectTodo }) {
   return (
-    <li className="mb-10 d-flex flex-row justify-content-center align-items-center p-10">
+    <li
+      onClick={selectTodo}
+      className={`mb-10 d-flex flex-row justify-content-center align-items-center p-10 ${
+        todo.selected ? "selected" : ""
+      }`}
+    >
       <span className="flex-fill mr-15">
         {todo.content} {todo.done && "(✓)"}{" "}
       </span>
-      <button className="btn btn-primary mr-15" onClick={toggleTodo}>
+      <button
+        className="btn btn-primary mr-15"
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleTodo();
+        }}
+      >
         Valider
       </button>
-      <button onClick={editTodo} className="btn btn-primary mr-15">
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          editTodo();
+        }}
+        className="btn btn-primary mr-15"
+      >
         Modifier
       </button>
-      <button onClick={deleteTodo} className="btn btn-reverse-primary mr-15">
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          deleteTodo();
+        }}
+        className="btn btn-reverse-primary mr-15"
+      >
         Supprimer
       </button>
     </li>
